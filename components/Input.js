@@ -16,6 +16,7 @@ import {
 } from '@firebase/firestore'
 import { getDownloadURL, ref, uploadString } from '@firebase/storage'
 import { db, storage, } from '../firebase'
+import { useSession } from 'next-auth/react'
 
 function Input() {
     const [input, setInput] = useState('')
@@ -23,11 +24,12 @@ function Input() {
     const [showEmoji, setShowEmoji] = useState(false)
     const filePickerRef = useRef(null)
     const [loading, setLoading] = useState(false)
+    const { data: session } = useSession()
 
     const openEmojiPicker = (e) => {
         let xx = filePickerRef//.current.click(e)
-        console.log('e', e);
-        console.log('xx', xx);
+        // console.log('e', e);
+        // console.log('xx', xx);
     }
 
     const sendPost = async () => {
@@ -36,12 +38,12 @@ function Input() {
 
         // return false
         const docRef = await addDoc(collection(db, 'posts'), {
-            // id: session.user.uid,
-            // username: session.user.name,
-            // userImg: session.user.image,
-            // tag: session.user.tag,
+            id: session.user.uid,
+            username: session.user.name,
+            userImg: session.user.image,
+            tag: session.user.tag,
             text: input,
-            timstamp: serverTimestamp(),
+            timestamp: serverTimestamp(),
         });
         const imageRef = ref(storage, `posts/${docRef.id}/image`)
 
@@ -70,7 +72,7 @@ function Input() {
     }
 
     const addImageToPost = (e) => {
-        console.log('masuk addImageToPost ');
+        // console.log('masuk addImageToPost ');
 
         const reader = new FileReader()
         if (e.target.files[0]) {
@@ -85,8 +87,9 @@ function Input() {
     return (
         <div className={`border-b border-gray-700 p-3 flex space-x-3 overflow-y-scroll ${loading && "opacity-60"}`}>
             <img
+                // src="https://pbs.twimg.com/profile_images/1004411023527276544/15aa3PpD_400x400.jpg"
                 alt=""
-                src="https://pbs.twimg.com/profile_images/1004411023527276544/15aa3PpD_400x400.jpg"
+                src={session.user.image}
                 className="h-11 rounded-full cursor-pointer"
             />
             <div className="w-full divide-y divide-gray-700">

@@ -6,12 +6,13 @@ import Login from '../components/Login'
 
 export default function Home({ trendingResults, followResults, providers }) {
   const { data: session } = useSession()
+
   console.log('trending', trendingResults);
   console.log('follw', followResults);
   console.log('prov', providers);
   console.log('sess', session);
 
-  // if (!session) return <Login providers={providers} />
+  if (!session) return <Login providers={providers} />
 
   return (
     <div className="">
@@ -23,7 +24,7 @@ export default function Home({ trendingResults, followResults, providers }) {
       <main className="min-h-screen flex max-w-[1500px] mx-auto">
         <Sidebar />
         <Feeds />
-        {/* {session.user.name} */}
+        {session.user.name}
         {/* widgets */}
         {/* modal */}
       </main>
@@ -36,9 +37,6 @@ export async function getServerSideProps(context) {
   const followResults = await fetch("https://jsonkeeper.com/b/WWMJ").then((res) => res.json())
   const providers = await getProviders()
   const session = await getSession(context)
-
-  console.log('context', context);
-  // return false
 
   return {
     props: {
