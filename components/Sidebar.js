@@ -1,7 +1,7 @@
+import { BellIcon, BookmarkIcon, ClipboardListIcon, DotsCircleHorizontalIcon, DotsHorizontalIcon, HashtagIcon, HomeIcon, MailIcon, UserIcon } from '@heroicons/react/solid'
 import Image from 'next/image'
 import React from 'react'
 import SidebarLink from './SidebarLink'
-import { BellIcon, HashtagIcon, HomeIcon } from '@heroicons/react/solid'
 
 function Sidebar() {
     return (
@@ -18,8 +18,25 @@ function Sidebar() {
                 <SidebarLink text={"Home"} Icon={HomeIcon} active />
                 <SidebarLink text={"Explore"} Icon={HashtagIcon} />
                 <SidebarLink text={"Notifications"} Icon={BellIcon} />
+                <SidebarLink text={"Messages"} Icon={MailIcon} />
+                <SidebarLink text={"Bookmarks"} Icon={BookmarkIcon} />
+                <SidebarLink text={"Lists"} Icon={ClipboardListIcon} />
+                <SidebarLink text={"Profile"} Icon={UserIcon} />
+                <SidebarLink text={"More"} Icon={DotsCircleHorizontalIcon} />
             </div>
+            <button className='hidden xl:inline ml-auto bg-[#1d9bf0] text-white rounded-full w-56 h-[52px] text-lg font-bold shadow-md hover:bg-[#1a8cd8]'>Tweet</button>
 
+            <div className="text-[#d9d9d9] flex items-center justify-center hoverAnimation xl:ml-auto xl:-mr-5 mt-auto">
+                <img
+                    className="h-10 w-10 rounded-full xl:mr-2.5"
+                    src="https://pbs.twimg.com/profile_images/1004411023527276544/15aa3PpD_400x400.jpg"
+                />
+                <div className="hidden xl:inline leading-5">
+                    <h4 className="font-bold">Bambang Pam.</h4>
+                    <p>ooo</p>
+                </div>
+                <DotsHorizontalIcon className="h-5 hidden xl:inline ml-10 " />
+            </div>
         </div>
     )
 }
