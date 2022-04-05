@@ -1,1 +1,3 @@
+- status : on progress
 - tutorial : https://www.youtube.com/watch?v=5Wak0iyGCrc
+- last view : https://youtu.be/5Wak0iyGCrc?t=15568
